@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -14,7 +15,7 @@ class AccountController extends Controller
     public function index($id)
     {
         $user = User::find($id);
-        return view('back_office/user.account', ['user'=> $user]);
+        return view('user.account', ['user'=> $user]);
     }
 
     /**
@@ -38,6 +39,7 @@ class AccountController extends Controller
         $data = new User();
         $data->firstname=request('addfirstname');
         $data->lastname=request('addlastname');
+        $data->email=request('addemail');
         $data->save();
         return redirect('user');
     }
@@ -50,7 +52,7 @@ class AccountController extends Controller
      */
     public function show(User $user)
     {
-        return view('back_office/user.show', ['user'=> $user]);
+        return view('users/show', ['users'=> $user]);
     }
 
     /**
@@ -59,9 +61,9 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit()
     {
-        return view('back_office/user.edit',['user'=>$user]);
+        return view('users/edit');
     }
 
     /**
@@ -75,8 +77,9 @@ class AccountController extends Controller
     {
         $user->firstname=request('addfirstname');
         $user->lastname=request('addlastname');
+        $user->email=request('addemail');
         $user->save();
-        return redirect('user');
+        return redirect('users/'.$user->id);
     }
 
     /**
