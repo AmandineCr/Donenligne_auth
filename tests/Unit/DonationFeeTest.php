@@ -26,4 +26,12 @@ class DonationFeeTest extends TestCase
         $expected = 10;
         $this->assertEquals($expected, $actual);
     }
+    public function testAmountCollected()
+    {
+        // Given montant perçu par le porteur du projet
+
+        // When
+
+        // Then
+    }
 }
